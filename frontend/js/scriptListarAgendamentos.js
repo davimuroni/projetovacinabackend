@@ -11,10 +11,10 @@ export async function carregarAgendamentos() {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${agendamento.id}</td>
-        <td>${agendamento.nomePaciente}</td>
-        <td>${agendamento.tipoVacina}</td>
-        <td>${agendamento.localVacinacao}</td>
-        <td>${agendamento.dataVacinacao}</td>
+        <td>${agendamento.nome_paciente}</td>
+        <td>${agendamento.tipo_vacina}</td>
+        <td>${agendamento.local_vacinacao}</td>
+        <td>${agendamento.data_vacinacao}</td>
       `;
       tabelaBody.appendChild(tr);
     });

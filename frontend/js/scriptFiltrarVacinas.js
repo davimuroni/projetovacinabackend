@@ -1,17 +1,19 @@
 async function loadVaccines() {
     try {
-        const response = await fetch("http://localhost:3000/cartaoVacina");
+        const response = await fetch("http://localhost:3000/cartaoVacina" );
         const data = await response.json();
         const tableBody = document.getElementById("vaccineTableBody");
         tableBody.innerHTML = "";
 
         data.forEach(vacina => {
-            const dataAplicacao = new Date(vacina.dataAplicacao);
+            // CORREÇÃO: Usando data_aplicacao
+            const dataAplicacao = new Date(vacina.data_aplicacao);
             const proximaDose = calcularProximaDose(dataAplicacao);
 
             const tr = document.createElement("tr");
             tr.innerHTML = `
-                <td>${vacina.tipoVacina}</td>
+                <!-- CORREÇÃO: Usando tipo_vacina -->
+                <td>${vacina.tipo_vacina}</td>
                 <td>${formatarData(dataAplicacao)}</td>
                 <td>${formatarData(proximaDose)}</td>
             `;

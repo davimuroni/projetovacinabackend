@@ -1,17 +1,19 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const tabela = document.getElementById("historicoVacinas");
-  const cartaoId = 1; // Id do cartão que deseja mostrar
+  // const cartaoId = 1; // Id do cartão que deseja mostrar - Removido, pois o frontend não tem lógica de login/usuário. Usaremos a rota de listagem completa.
 
   // Data atual
   const hoje = new Date().toISOString().split("T")[0]; // yyyy-mm-dd
 
   try {
-    const response = await fetch(`http://localhost:3000/cartaoVacina/${cartaoId}`);
+    // 1. Rota corrigida para buscar todos os registros do cartão
+    const response = await fetch(`http://localhost:3000/cartaoVacina` );
     const data = await response.json();
 
     tabela.innerHTML = "";
 
-    const vacinasHoje = data.filter(vacina => vacina.dataAplicacao === hoje);
+    // 2. Nomes de campos corrigidos para corresponder ao backend (data_aplicacao)
+    const vacinasHoje = data.filter(vacina => vacina.data_aplicacao === hoje);
 
     if (vacinasHoje.length === 0) {
       tabela.innerHTML = `
@@ -25,8 +27,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     vacinasHoje.forEach(vacina => {
       const tr = document.createElement("tr");
       tr.innerHTML = `
-        <td>${vacina.tipoVacina}</td>
-        <td>${vacina.dataAplicacao}</td>
+        <!-- 3. Nomes de campos corrigidos (tipo_vacina e data_aplicacao) -->
+        <td>${vacina.tipo_vacina}</td>
+        <td>${vacina.data_aplicacao}</td>
         <td>${vacina.responsavel || "-"}</td>
         <td>${vacina.lote || "-"}</td>
         <td>${vacina.funcionario || "-"}</td>
